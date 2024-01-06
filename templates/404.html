@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+  <h1 style="color:yellow;">{{error.code}}: {{error.name}}</h1>
+  <h2 style="color:yellow;">Now how did we get here?</h2>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="error">
+      <p style="color:yellow;">{{error.description}}</p>
+      <p style="color:yellow;">In plain English, that means this page doesn't exist! Make sure you typed in the URL correctly!</p>
+      <center><img src="{{url_for('static', filename='404.png')}}" style="width: 50%;border-radius: 20px;"></center>
+    </div>
+  </div>
+{% endblock %}

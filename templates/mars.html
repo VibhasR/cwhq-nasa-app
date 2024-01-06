@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% set title="Mars" %}
+{% block heading %}
+<h1>Home</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  
+  <form id="mars-form" action="{{ url_for('mars') }}" method="POST">
+    <!-- SOL INPUT -->
+    <label for="sol-input">Sol: </label>
+    <input type="number" id="sol-input" name="sol" value="0" min="0" placeholder="days after landing" required>
+    
+    <!-- CAMERA DROPDOWN -->
+    <label for="camera-select">Select a camera: </label>
+    <select id="camera-select" name="camera">
+      <option value="FHAZ">Front Hazard Avoidance Camera</option>
+      <option value="RHAZ">Rear Hazard Avoidance Camera</option>
+      <option value="MAST">Mast Camera</option>
+    </select>
+    
+    <input type="submit">
+    
+  </form>
+  
+  {% if photos %}
+    <div class="photos-container">
+        <h2 id="camera-heading">{{ photos[0].camera.full_name }}</h2>
+        <div class="photos-scroll">
+          {% for photo in photos %}
+            <img class="rover-img" src="{{ photo.img_src }}">
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+        <h2 id="no-photos">There are no photos!</h2>
+      {% endif %}
+  {% for food in ["peach", "pear", "tomato"] %}
+        {% if food == "pear" %}
+        <p>Food:</p>}
+        <p>{{ food }} </p>}
+        {% endif %}
+{% endfor %}
+  <br>
+  <p id="mars-explanation">
+  Curiosity is a car-sized Mars rover designed to explore the Gale crater on Mars as part
+  of NASA's Mars Science Laboratory (MSL) mission.
+  Curiosity was launched from Cape Canaveral (CCAFS) on 26 November 2011, at 15:02:00 UTC
+  and landed on Aeolis Palus inside Gale crater on Mars on 6 August 2012, 05:17:57 UTC.
+  The Bradbury Landing site was less than 2.4 km (1.5 mi) from the center of the rover's
+  touchdown target after a 560 million km (350 million mi) journey. </p>
+  
+  <p id="mars-instructions">
+  This app will allow you to view photos from the different cameras mounted on the rover.
+  Select the sol date (Martian days after landing) and the camera for the photos you want
+  to view.
+  <strong>Not all dates and cameras may have photos</strong>
+  </p>
+  
+</div>
+{% endblock %}

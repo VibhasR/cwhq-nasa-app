@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% set title="APOD" %}
+{% block heading %}
+<h1>Astronomy Photo of the Day</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container row row-cols-2 g-4">
+  <img id="apod-image" src=" {{ apod.url }} " style="border-radius: 20px; height: 75%;">
+  <div id="apod-container" style="background-color: gray;border-radius: 20px;height: 75%;">
+    <h2 id="apod-title"><strong>{{ apod.title }}</strong></h2>
+    <p id="apod-desc">{{ apod.explanation }}</p>
+    <center><div id="apod-date">
+      <input id="date-picker" type="date" style="color:blue;">
+      <btn id="date-btn" onclick="loadAPOD()">Go</btn>
+    </div>
+    </center>
+    <br>
+  </div>
+  
+</div>
+<script>
+  function loadAPOD(){
+    var date = document.getElementById("date-picker").value
+    location.href = "{{ url_for('apod') }}" + date;
+  }
+</script>
+{% endblock %}
